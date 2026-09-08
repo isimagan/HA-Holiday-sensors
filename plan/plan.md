@@ -45,3 +45,4 @@ Følgende har vært brukt med `input_datetime`:
 | `lastDay` | `true` hvis dagen i dag er lik `sensor.holiday_stop`, ellers `false` |
 | `dayNumber` | Dagens dato minus `sensor.holiday_start` |
 | `daysLeft` | `sensor.holiday_stop` minus dagens dato |
+| `numberOfDays` | `sensor.holiday_stop` minus `sensor.holiday_start` |
