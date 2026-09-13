@@ -1,0 +1,40 @@
+{
+  "config": {
+    "abort": {
+      "single_instance_allowed": "Bare én Holiday Sensors-instans kan konfigureres."
+    },
+    "error": {
+      "stop_not_after_start": "Hjemreisedatoen må være etter avreisedatoen."
+    },
+    "step": {
+      "reconfigure": {
+        "data": {
+          "holiday_start": "Avreisedato",
+          "holiday_stop": "Hjemreisedato",
+          "holiday_time_home": "Forventet hjemkomsttid"
+        },
+        "data_description": {
+          "holiday_start": "Feriens første dag.",
+          "holiday_stop": "Dagen du reiser hjem. Ferien avsluttes ved starten av denne datoen.",
+          "holiday_time_home": "Forventet lokal hjemkomsttid på hjemreisedatoen."
+        },
+        "description": "Oppdater datoene og forventet hjemkomsttid.",
+        "title": "Oppdater ferie"
+      },
+      "user": {
+        "data": {
+          "holiday_start": "Avreisedato",
+          "holiday_stop": "Hjemreisedato",
+          "holiday_time_home": "Forventet hjemkomsttid"
+        },
+        "data_description": {
+          "holiday_start": "Feriens første dag.",
+          "holiday_stop": "Dagen du reiser hjem. Ferien avsluttes ved starten av denne datoen.",
+          "holiday_time_home": "Forventet lokal hjemkomsttid på hjemreisedatoen."
+        },
+        "description": "Velg ferieperiode og forventet hjemkomsttid.",
+        "title": "Konfigurer Holiday Sensors"
+      }
+    }
+  }
+}
