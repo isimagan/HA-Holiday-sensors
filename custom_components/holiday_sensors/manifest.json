@@ -2,10 +2,12 @@
   "domain": "holiday_sensors",
   "name": "Holiday Sensors",
   "codeowners": ["@isimagan"],
+  "config_flow": true,
   "documentation": "https://github.com/isimagan/HA-Holiday-sensors",
   "integration_type": "helper",
   "iot_class": "calculated",
   "issue_tracker": "https://github.com/isimagan/HA-Holiday-sensors/issues",
   "requirements": [],
+  "single_config_entry": true,
   "version": "0.1.0"
 }
