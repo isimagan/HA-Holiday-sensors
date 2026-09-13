@@ -28,8 +28,8 @@
 
 Følgende har vært brukt med `input_datetime`:
 ``` yaml
-{% set home = as_datetime(states('input_datetime.ferie_avreise')).date() %}
-{% set home = as_datetime(states('input_datetime.ferie_hjemreise')).date() %}
+{% set avreise = as_datetime(states('input_datetime.ferie_avreise')).date() %}
+{% set hjemreise = as_datetime(states('input_datetime.ferie_hjemreise')).date() %}
 {{ avreise <= now().date() < hjemreise }}
 ```
 
@@ -41,8 +41,10 @@ Følgende har vært brukt med `input_datetime`:
 
 ### Attributter
 | Attributt | Beskrivelse |
-|---|---|
+|---|:---|
 | `lastDay` | `true` hvis dagen i dag er lik `sensor.holiday_stop`, ellers `false` |
-| `dayNumber` | Dagens dato minus `sensor.holiday_start` |
+| `dayNumber` | Dagens dato minus `sensor.holiday_start`, der avreisedagen er dag 0 |
 | `daysLeft` | `sensor.holiday_stop` minus dagens dato |
 | `numberOfDays` | `sensor.holiday_stop` minus `sensor.holiday_start` |
+
+Eksempel: Avreise fredag og hjemreise søndag gir `dayNumber` 0 fredag, 1 lørdag og 2 søndag. `numberOfDays` er 2.
