@@ -7,6 +7,7 @@ from datetime import date, datetime, time
 from homeassistant.components.sensor import SensorDeviceClass, SensorEntity
 from homeassistant.config_entries import ConfigEntry
 from homeassistant.core import HomeAssistant
+from homeassistant.helpers.entity import DeviceInfo
 from homeassistant.helpers.entity_platform import AddConfigEntryEntitiesCallback
 from homeassistant.util import dt as dt_util
 
@@ -14,6 +15,7 @@ from .const import (
     CONF_HOLIDAY_START,
     CONF_HOLIDAY_STOP,
     CONF_HOLIDAY_TIME_HOME,
+    DOMAIN,
 )
 
 
@@ -40,6 +42,13 @@ class HolidaySensorEntity(SensorEntity):
     def __init__(self, entry: ConfigEntry) -> None:
         """Initialize a Holiday Sensors sensor."""
         self._entry = entry
+        self._attr_device_info = DeviceInfo(
+            identifiers={(DOMAIN, entry.entry_id)},
+            name=entry.title,
+            manufacturer="isimagan",
+            model="Holiday Sensors",
+            configuration_url="https://github.com/isimagan/HA-Holiday-sensors",
+        )
 
 
 class HolidayStartSensor(HolidaySensorEntity):

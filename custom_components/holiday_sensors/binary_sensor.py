@@ -8,11 +8,12 @@ from typing import Any
 from homeassistant.components.binary_sensor import BinarySensorEntity
 from homeassistant.config_entries import ConfigEntry
 from homeassistant.core import HomeAssistant, callback
+from homeassistant.helpers.entity import DeviceInfo
 from homeassistant.helpers.entity_platform import AddConfigEntryEntitiesCallback
 from homeassistant.helpers.event import async_track_time_change
 from homeassistant.util import dt as dt_util
 
-from .const import CONF_HOLIDAY_START, CONF_HOLIDAY_STOP
+from .const import CONF_HOLIDAY_START, CONF_HOLIDAY_STOP, DOMAIN
 
 
 async def async_setup_entry(
@@ -34,6 +35,13 @@ class HolidayNowBinarySensor(BinarySensorEntity):
         """Initialize the holiday binary sensor."""
         self._entry = entry
         self._attr_unique_id = f"{entry.entry_id}_holiday_now"
+        self._attr_device_info = DeviceInfo(
+            identifiers={(DOMAIN, entry.entry_id)},
+            name=entry.title,
+            manufacturer="isimagan",
+            model="Holiday Sensors",
+            configuration_url="https://github.com/isimagan/HA-Holiday-sensors",
+        )
 
     @property
     def _start(self) -> date:
