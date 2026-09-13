@@ -1,16 +1,24 @@
 # Holiday Sensors for Home Assistant
 
-Holiday Sensors is a planned Home Assistant helper integration for keeping track of a holiday period, the journey home, and useful day counters for automations.
+Holiday Sensors is a Home Assistant helper integration for keeping track of a holiday period, the journey home, and useful day counters for automations.
 
-> [!IMPORTANT]
-> The repository currently contains the HACS-compatible project scaffold. The holiday entities described below are not implemented yet.
+## Entities
 
-## Planned entities
+The integration creates:
 
-- `sensor.holiday_start`: first day of the holiday
-- `sensor.holiday_stop`: day of the journey home
-- `sensor.holiday_time_home`: expected arrival time
-- `binary_sensor.holiday_now`: whether the holiday is currently active
+- `sensor.holiday_start`: the first day of the holiday
+- `sensor.holiday_stop`: the day of the journey home
+- `sensor.holiday_time_home`: the expected arrival time, with `homeDate` containing the home date and time as an ISO timestamp
+- `binary_sensor.holiday_now`: on from the start date up to, but not including, the home date
+
+`binary_sensor.holiday_now` provides these attributes:
+
+- `lastDay`: whether today is the home date
+- `dayNumber`: whole days since the start date; the start date is day 0
+- `daysLeft`: whole days until the home date
+- `numberOfDays`: the difference in whole days between the start and home dates
+
+For a holiday starting Friday with a home date on Sunday, `dayNumber` is 0 on Friday, 1 on Saturday, and 2 on Sunday. `numberOfDays` is 2.
 
 The detailed design and example automations are available in the [plan directory](plan/).
 
@@ -23,9 +31,14 @@ Until the repository is included in the default HACS catalogue:
 3. Add `https://github.com/isimagan/HA-Holiday-sensors`.
 4. Select **Integration** as the category.
 5. Download **Holiday Sensors** and restart Home Assistant.
+6. Go to **Settings → Devices & services → Add integration** and select **Holiday Sensors**.
 
-The integration files are installed from `custom_components/holiday_sensors`.
+## Configuration
 
-## Development status
+During setup, choose:
 
-The repository structure, manifests, and automated HACS/Home Assistant validation are in place. Entity implementation and a configuration flow are the next development steps.
+- Departure date
+- Home date
+- Expected arrival time
+
+The initial defaults are two days before today, one day before today, and `12:00:00`. To change them later, open Holiday Sensors under **Devices & services** and choose **Configure**.
