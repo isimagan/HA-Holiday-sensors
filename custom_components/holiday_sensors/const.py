@@ -11,4 +11,4 @@ CONF_HOLIDAY_STOP = "holiday_stop"
 CONF_HOLIDAY_TIME_HOME = "holiday_time_home"
 
 DEFAULT_TIME_HOME = time(12, 0).isoformat()
-PLATFORMS = [Platform.BINARY_SENSOR, Platform.SENSOR]
+PLATFORMS = [Platform.BINARY_SENSOR, Platform.DATE, Platform.TIME]

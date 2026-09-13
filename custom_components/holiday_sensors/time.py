@@ -1,0 +1,63 @@
+"""Time platform for Holiday Sensors."""
+
+from __future__ import annotations
+
+from datetime import date, datetime, time
+
+from homeassistant.components.time import TimeEntity
+from homeassistant.config_entries import ConfigEntry
+from homeassistant.core import HomeAssistant
+from homeassistant.helpers.entity import DeviceInfo
+from homeassistant.helpers.entity_platform import AddConfigEntryEntitiesCallback
+from homeassistant.util import dt as dt_util
+
+from .const import CONF_HOLIDAY_STOP, CONF_HOLIDAY_TIME_HOME, DOMAIN
+
+
+async def async_setup_entry(
+    hass: HomeAssistant,
+    entry: ConfigEntry,
+    async_add_entities: AddConfigEntryEntitiesCallback,
+) -> None:
+    """Set up the Holiday Sensors time entity."""
+    async_add_entities([HolidayTimeHome(entry)])
+
+
+class HolidayTimeHome(TimeEntity):
+    """Editable expected arrival time."""
+
+    _attr_icon = "mdi:home-clock"
+    _attr_name = "Holiday time home"
+    _attr_should_poll = False
+
+    def __init__(self, entry: ConfigEntry) -> None:
+        """Initialize the expected arrival time."""
+        self._entry = entry
+        self._attr_unique_id = f"{entry.entry_id}_holiday_time_home"
+        self._attr_device_info = DeviceInfo(
+            identifiers={(DOMAIN, entry.entry_id)},
+            name=entry.title,
+            manufacturer="isimagan",
+            model="Holiday Sensors",
+            configuration_url="https://github.com/isimagan/HA-Holiday-sensors",
+        )
+
+    @property
+    def native_value(self) -> time:
+        """Return the expected arrival time."""
+        return time.fromisoformat(self._entry.data[CONF_HOLIDAY_TIME_HOME])
+
+    async def async_set_value(self, value: time) -> None:
+        """Set the expected arrival time."""
+        data = dict(self._entry.data)
+        data[CONF_HOLIDAY_TIME_HOME] = value.isoformat()
+        self.hass.config_entries.async_update_entry(self._entry, data=data)
+        await self.hass.config_entries.async_reload(self._entry.entry_id)
+
+    @property
+    def extra_state_attributes(self) -> dict[str, str]:
+        """Return the combined local home date and time."""
+        stop = date.fromisoformat(self._entry.data[CONF_HOLIDAY_STOP])
+        timezone = dt_util.get_time_zone(self.hass.config.time_zone)
+        home_date = datetime.combine(stop, self.native_value, tzinfo=timezone)
+        return {"homeDate": home_date.isoformat()}

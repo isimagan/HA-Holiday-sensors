@@ -1,14 +1,14 @@
 # Holiday Sensors for Home Assistant
 
-Holiday Sensors is a Home Assistant helper integration for keeping track of a holiday period, the journey home, and useful day counters for automations.
+Holiday Sensors is a Home Assistant integration for keeping track of a holiday period, the journey home, and useful day counters for automations.
 
 ## Entities
 
 The integration creates:
 
-- `sensor.holiday_start`: the first day of the holiday
-- `sensor.holiday_stop`: the day of the journey home
-- `sensor.holiday_time_home`: the expected arrival time, with `homeDate` containing the home date and time as an ISO timestamp
+- `date.holiday_start`: editable first day of the holiday
+- `date.holiday_stop`: editable day of the journey home
+- `time.holiday_time_home`: editable expected arrival time, with `homeDate` containing the home date and time as an ISO timestamp
 - `binary_sensor.holiday_now`: on from the start date up to, but not including, the home date
 
 `binary_sensor.holiday_now` provides these attributes:
@@ -41,4 +41,4 @@ During setup, choose:
 - Home date
 - Expected arrival time
 
-The initial defaults are two days before today, one day before today, and `12:00:00`. To change them later, open Holiday Sensors under **Devices & services** and choose **Configure**.
+The initial defaults are two days before today, one day before today, and `12:00:00`. The three values can be changed directly from their date and time entities or by opening Holiday Sensors under **Devices & services** and choosing **Configure**.

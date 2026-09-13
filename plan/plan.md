@@ -4,27 +4,27 @@
 - Egen integrasjonsside
 - **Ikon:** `mdi:tsunami`
 
-## sensor.holiday_start
-- Dato uten tid
+## date.holiday_start
+- Redigerbar dato uten tid
 - Ved installering er standard: To dager før dagens dato
 - Ikon: `mdi:weather-sunny`
 
-## sensor.holiday_stop
-- Dato uten tid
+## date.holiday_stop
+- Redigerbar dato uten tid
 - Ved installering er standard: En dag før dagens dato
 - Ikon: `mdi:home`
 
-## sensor.holiday_time_home
-- Kun tidspunkt
+## time.holiday_time_home
+- Redigerbart tidspunkt
 - Ved installering er standard: 12:00:00
 
 ### Attributter
 | Attributt | Beskrivelse |
 |---|:---|
-| `homeDate` | Sensorens state og `sensor.holiday_stop` smeltet sammen til et tidspunkt som kan leses av HomeAssistant |
+| `homeDate` | Entitetens state og `date.holiday_stop` smeltet sammen til et tidspunkt som kan leses av Home Assistant |
 
 ## binary_sensor.holiday_now
-`true` hvis *dagen i dag* er på eller etter `sensor.holiday_start`, og før `sensor.holiday_stop`, ellers false.
+`true` hvis *dagen i dag* er på eller etter `date.holiday_start`, og før `date.holiday_stop`, ellers false.
 
 Følgende har vært brukt med `input_datetime`:
 ``` yaml
@@ -42,9 +42,9 @@ Følgende har vært brukt med `input_datetime`:
 ### Attributter
 | Attributt | Beskrivelse |
 |---|:---|
-| `lastDay` | `true` hvis dagen i dag er lik `sensor.holiday_stop`, ellers `false` |
-| `dayNumber` | Dagens dato minus `sensor.holiday_start`, der avreisedagen er dag 0 |
-| `daysLeft` | `sensor.holiday_stop` minus dagens dato |
-| `numberOfDays` | `sensor.holiday_stop` minus `sensor.holiday_start` |
+| `lastDay` | `true` hvis dagen i dag er lik `date.holiday_stop`, ellers `false` |
+| `dayNumber` | Dagens dato minus `date.holiday_start`, der avreisedagen er dag 0 |
+| `daysLeft` | `date.holiday_stop` minus dagens dato |
+| `numberOfDays` | `date.holiday_stop` minus `date.holiday_start` |
 
 Eksempel: Avreise fredag og hjemreise søndag gir `dayNumber` 0 fredag, 1 lørdag og 2 søndag. `numberOfDays` er 2.
