@@ -11,7 +11,13 @@ from homeassistant.helpers.entity import DeviceInfo
 from homeassistant.helpers.entity_platform import AddConfigEntryEntitiesCallback
 from homeassistant.util import dt as dt_util
 
-from .const import CONF_HOLIDAY_STOP, CONF_HOLIDAY_TIME_HOME, DOMAIN
+from .const import (
+    ATTR_CUSTOM_UI_MORE_INFO,
+    CONF_HOLIDAY_STOP,
+    CONF_HOLIDAY_TIME_HOME,
+    DOMAIN,
+    MORE_INFO_ELEMENT,
+)
 
 
 async def async_setup_entry(
@@ -56,8 +62,11 @@ class HolidayTimeHome(TimeEntity):
 
     @property
     def extra_state_attributes(self) -> dict[str, str]:
-        """Return the combined local home date and time."""
+        """Return the combined local home date and frontend metadata."""
         stop = date.fromisoformat(self._entry.data[CONF_HOLIDAY_STOP])
         timezone = dt_util.get_time_zone(self.hass.config.time_zone)
         home_date = datetime.combine(stop, self.native_value, tzinfo=timezone)
-        return {"homeDate": home_date.isoformat()}
+        return {
+            "homeDate": home_date.isoformat(),
+            ATTR_CUSTOM_UI_MORE_INFO: MORE_INFO_ELEMENT,
+        }

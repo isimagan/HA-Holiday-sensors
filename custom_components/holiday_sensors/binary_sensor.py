@@ -59,6 +59,11 @@ class HolidayNowBinarySensor(BinarySensorEntity):
         return dt_util.now().date()
 
     @property
+    def available(self) -> bool:
+        """Return whether the holiday has not ended."""
+        return self._today <= self._stop
+
+    @property
     def is_on(self) -> bool:
         """Return whether the holiday is active."""
         return self._start <= self._today < self._stop

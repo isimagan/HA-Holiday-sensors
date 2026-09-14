@@ -17,6 +17,7 @@
 ## time.holiday_time_home
 - Redigerbart tidspunkt
 - Ved installering er standard: 12:00:00
+- «Mer info» viser hjemkomstdatoen under tidsvelgeren, midtstilt og med større skrift
 
 ### Attributter
 | Attributt | Beskrivelse |
@@ -24,7 +25,7 @@
 | `homeDate` | Entitetens state og `date.holiday_stop` smeltet sammen til et tidspunkt som kan leses av Home Assistant |
 
 ## binary_sensor.holiday_now
-`true` hvis *dagen i dag* er på eller etter `date.holiday_start`, og før `date.holiday_stop`, ellers false.
+`true` hvis *dagen i dag* er på eller etter `date.holiday_start`, og før `date.holiday_stop`, ellers false. Entiteten er utilgjengelig når dagens dato er etter `date.holiday_stop`.
 
 Følgende har vært brukt med `input_datetime`:
 ``` yaml

@@ -1,11 +1,40 @@
 """Holiday Sensors integration."""
 
+from pathlib import Path
+from typing import Any
+
+from homeassistant.components.frontend import add_extra_js_url
+from homeassistant.components.http import StaticPathConfig
 from homeassistant.config_entries import ConfigEntry
 from homeassistant.const import Platform
 from homeassistant.core import HomeAssistant
+from homeassistant.helpers import config_validation as cv
 from homeassistant.helpers import entity_registry as er
 
-from .const import DOMAIN, PLATFORMS
+from .const import (
+    DOMAIN,
+    FRONTEND_MODULE_URL,
+    FRONTEND_STATIC_URL,
+    PLATFORMS,
+)
+
+CONFIG_SCHEMA = cv.config_entry_only_config_schema(DOMAIN)
+
+
+async def async_setup(hass: HomeAssistant, config: dict[str, Any]) -> bool:
+    """Set up the Holiday Sensors frontend module."""
+    frontend_path = Path(__file__).parent / "frontend"
+    await hass.http.async_register_static_paths(
+        [
+            StaticPathConfig(
+                FRONTEND_STATIC_URL,
+                str(frontend_path / "holiday-time-more-info.js"),
+                True,
+            )
+        ]
+    )
+    add_extra_js_url(hass, FRONTEND_MODULE_URL)
+    return True
 
 
 def _remove_legacy_sensor_entities(hass: HomeAssistant, entry: ConfigEntry) -> None:

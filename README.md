@@ -9,7 +9,9 @@ The integration creates:
 - `date.holiday_start`: editable first day of the holiday
 - `date.holiday_stop`: editable day of the journey home
 - `time.holiday_time_home`: editable expected arrival time, with `homeDate` containing the home date and time as an ISO timestamp
-- `binary_sensor.holiday_now`: on from the start date up to, but not including, the home date
+- `binary_sensor.holiday_now`: on from the start date up to, but not including, the home date; unavailable after the home date
+
+The more-info dialog for `time.holiday_time_home` displays the localized home date below the time control.
 
 `binary_sensor.holiday_now` provides these attributes:
 
