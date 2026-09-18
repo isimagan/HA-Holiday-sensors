@@ -32,6 +32,7 @@ class HolidayDateEntity(DateEntity):
     """Base class for Holiday Sensors date entities."""
 
     _attr_should_poll = False
+    _attr_has_entity_name = True
 
     def __init__(self, entry: ConfigEntry) -> None:
         """Initialize a Holiday Sensors date entity."""
@@ -60,11 +61,12 @@ class HolidayStartDate(HolidayDateEntity):
     """Editable holiday start date."""
 
     _attr_icon = "mdi:weather-sunny"
-    _attr_name = "Holiday start"
+    _attr_name = "Start"
 
     def __init__(self, entry: ConfigEntry) -> None:
         """Initialize the holiday start date."""
         super().__init__(entry)
+        self.entity_id = "date.holiday_sensor_start"
         self._attr_unique_id = f"{entry.entry_id}_holiday_start"
 
     @property
@@ -81,11 +83,12 @@ class HolidayStopDate(HolidayDateEntity):
     """Editable holiday stop date."""
 
     _attr_icon = "mdi:home"
-    _attr_name = "Holiday stop"
+    _attr_name = "Stop"
 
     def __init__(self, entry: ConfigEntry) -> None:
         """Initialize the holiday stop date."""
         super().__init__(entry)
+        self.entity_id = "date.holiday_sensor_stop"
         self._attr_unique_id = f"{entry.entry_id}_holiday_stop"
 
     @property
