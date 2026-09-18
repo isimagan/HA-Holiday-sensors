@@ -28,12 +28,14 @@ async def async_setup_entry(
 class HolidayNowBinarySensor(BinarySensorEntity):
     """Whether today falls within the configured holiday period."""
 
-    _attr_name = "Holiday now"
+    _attr_name = "Now"
     _attr_should_poll = False
+    _attr_has_entity_name = True
 
     def __init__(self, entry: ConfigEntry) -> None:
         """Initialize the holiday binary sensor."""
         self._entry = entry
+        self.entity_id = "binary_sensor.holiday_sensor_now"
         self._attr_unique_id = f"{entry.entry_id}_holiday_now"
         self._attr_device_info = DeviceInfo(
             identifiers={(DOMAIN, entry.entry_id)},
