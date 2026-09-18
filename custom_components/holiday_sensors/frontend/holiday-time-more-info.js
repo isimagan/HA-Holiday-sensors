@@ -30,12 +30,14 @@ class HolidayTimeMoreInfo extends HTMLElement {
           line-height: 1.3;
         }
       </style>
+      <more-info-content></more-info-content>
       <div class="home-date" aria-live="polite">
         <span class="label"></span>
         <span class="value"></span>
       </div>
     `;
 
+    this._control = this.shadowRoot.querySelector("more-info-content");
     this._label = this.shadowRoot.querySelector(".label");
     this._value = this.shadowRoot.querySelector(".value");
   }
@@ -52,20 +54,33 @@ class HolidayTimeMoreInfo extends HTMLElement {
 
   set entry(value) {
     this._entry = value;
+    this._update();
   }
 
   set editMode(value) {
     this._editMode = value;
+    this._update();
   }
 
   set data(value) {
     this._data = value;
+    this._update();
   }
 
   _update() {
     if (!this._stateObj) {
       return;
     }
+
+    // Let HA load its native time control, without recursively selecting us.
+    // Clone attributes so the real entity keeps its custom more-info metadata.
+    const attributes = { ...this._stateObj.attributes };
+    delete attributes.custom_ui_more_info;
+    this._control.hass = this._hass;
+    this._control.stateObj = { ...this._stateObj, attributes };
+    this._control.entry = this._entry;
+    this._control.editMode = this._editMode;
+    this._control.data = this._data;
 
     const language = this._hass?.locale?.language ?? navigator.language;
     const norwegian = /^(nb|nn|no)(-|$)/i.test(language);
