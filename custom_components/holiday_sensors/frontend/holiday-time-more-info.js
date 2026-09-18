@@ -83,8 +83,11 @@ class HolidayTimeMoreInfo extends HTMLElement {
     this._control.data = this._data;
 
     const language = this._hass?.locale?.language ?? navigator.language;
-    const norwegian = /^(nb|nn|no)(-|$)/i.test(language);
-    this._label.textContent = norwegian ? "Dato for hjemkomst" : "Home date";
+    const label = this._hass?.formatEntityAttributeName?.(
+      this._stateObj,
+      "homeDate"
+    );
+    this._label.textContent = label && label !== "homeDate" ? label : "Home date";
 
     const value = this._stateObj.attributes?.homeDate;
     const date = new Date(value);
