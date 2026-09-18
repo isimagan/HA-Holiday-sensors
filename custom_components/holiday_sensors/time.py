@@ -34,7 +34,7 @@ class HolidayTimeHome(TimeEntity):
     """Editable expected arrival time."""
 
     _attr_icon = "mdi:home-clock"
-    _attr_name = "Time home"
+    _attr_translation_key = "time_home"
     _attr_should_poll = False
     _attr_has_entity_name = True
 
