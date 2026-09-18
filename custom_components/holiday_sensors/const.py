@@ -15,7 +15,7 @@ CONF_HOLIDAY_TIME_HOME = "holiday_time_home"
 DEFAULT_TIME_HOME = time(12, 0).isoformat()
 
 FRONTEND_MODULE_URL = (
-    "/api/holiday_sensors/holiday-time-more-info.js?rev=1"
+    "/api/holiday_sensors/holiday-time-more-info.js?rev=2"
 )
 FRONTEND_STATIC_URL = "/api/holiday_sensors/holiday-time-more-info.js"
 MORE_INFO_ELEMENT = "holiday-time-more-info"
