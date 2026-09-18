@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from datetime import date
+from datetime import date, timedelta
 
 from homeassistant.components.date import DateEntity
 from homeassistant.config_entries import ConfigEntry
@@ -48,6 +48,10 @@ class HolidayDateEntity(DateEntity):
         """Store a date and reload all related entities."""
         data = dict(self._entry.data)
         data[key] = value.isoformat()
+        if key == CONF_HOLIDAY_START:
+            stop = date.fromisoformat(data[CONF_HOLIDAY_STOP])
+            if stop <= value:
+                data[CONF_HOLIDAY_STOP] = (value + timedelta(days=1)).isoformat()
         self.hass.config_entries.async_update_entry(self._entry, data=data)
         await self.hass.config_entries.async_reload(self._entry.entry_id)
 
@@ -69,10 +73,7 @@ class HolidayStartDate(HolidayDateEntity):
         return date.fromisoformat(self._entry.data[CONF_HOLIDAY_START])
 
     async def async_set_value(self, value: date) -> None:
-        """Set the holiday start date."""
-        stop = date.fromisoformat(self._entry.data[CONF_HOLIDAY_STOP])
-        if value >= stop:
-            raise HomeAssistantError("Holiday start must be before holiday stop")
+        """Set departure, moving the home date forward when needed."""
         await self._async_store_value(CONF_HOLIDAY_START, value)
 
 
