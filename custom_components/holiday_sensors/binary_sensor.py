@@ -28,7 +28,7 @@ async def async_setup_entry(
 class HolidayNowBinarySensor(BinarySensorEntity):
     """Whether today falls within the configured holiday period."""
 
-    _attr_name = "Now"
+    _attr_translation_key = "now"
     _attr_should_poll = False
     _attr_has_entity_name = True
 
