@@ -6,14 +6,16 @@ Holiday Sensors is a Home Assistant integration for keeping track of a holiday p
 
 The integration creates:
 
-- `date.holiday_start`: editable first day of the holiday
-- `date.holiday_stop`: editable day of the journey home
-- `time.holiday_time_home`: editable expected arrival time, with `homeDate` containing the home date and time as an ISO timestamp
-- `binary_sensor.holiday_now`: on from the start date up to, but not including, the home date; unavailable after the home date
+- `date.holiday_sensor_start`: editable first day of the holiday
+- `date.holiday_sensor_stop`: editable day of the journey home
+- `time.holiday_sensor_time_home`: editable expected arrival time, with `homeDate` containing the home date and time as an ISO timestamp
+- `binary_sensor.holiday_sensor_now`: on from the start date up to, but not including, the home date; unavailable after the home date
 
-The more-info dialog for `time.holiday_time_home` displays the localized home date below the time control.
+The time entity also provides `homeToday`, which is true when the local date matches the date portion of `homeDate` and updates at local midnight.
 
-`binary_sensor.holiday_now` provides these attributes:
+The more-info dialog for `time.holiday_sensor_time_home` displays the localized home date below the time control.
+
+`binary_sensor.holiday_sensor_now` provides these attributes:
 
 - `lastDay`: whether today is the home date
 - `dayNumber`: whole days since the start date; the start date is day 0
@@ -44,3 +46,7 @@ During setup, choose:
 - Expected arrival time
 
 The initial defaults are two days before today, one day before today, and `12:00:00`. The three values can be changed directly from their date and time entities or by opening Holiday Sensors under **Devices & services** and choosing **Configure**.
+
+## Entity naming
+
+Entity names are Start, Stop, Time home, and Now. New default entity IDs use the `holiday_sensor_` prefix. Known previous default IDs are migrated on setup, while custom IDs and occupied target IDs are preserved. Unique IDs remain unchanged. Review dashboards, automations, scripts, and templates that reference old entity IDs after upgrading; YAML references are not rewritten by this integration.
