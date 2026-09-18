@@ -61,7 +61,7 @@ class HolidayStartDate(HolidayDateEntity):
     """Editable holiday start date."""
 
     _attr_icon = "mdi:weather-sunny"
-    _attr_name = "Start"
+    _attr_translation_key = "start"
 
     def __init__(self, entry: ConfigEntry) -> None:
         """Initialize the holiday start date."""
@@ -83,7 +83,7 @@ class HolidayStopDate(HolidayDateEntity):
     """Editable holiday stop date."""
 
     _attr_icon = "mdi:home"
-    _attr_name = "Stop"
+    _attr_translation_key = "stop"
 
     def __init__(self, entry: ConfigEntry) -> None:
         """Initialize the holiday stop date."""
