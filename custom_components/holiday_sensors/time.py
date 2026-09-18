@@ -34,12 +34,14 @@ class HolidayTimeHome(TimeEntity):
     """Editable expected arrival time."""
 
     _attr_icon = "mdi:home-clock"
-    _attr_name = "Holiday time home"
+    _attr_name = "Time home"
     _attr_should_poll = False
+    _attr_has_entity_name = True
 
     def __init__(self, entry: ConfigEntry) -> None:
         """Initialize the expected arrival time."""
         self._entry = entry
+        self.entity_id = "time.holiday_sensor_time_home"
         self._attr_unique_id = f"{entry.entry_id}_holiday_time_home"
         self._attr_device_info = DeviceInfo(
             identifiers={(DOMAIN, entry.entry_id)},
