@@ -47,9 +47,33 @@ def _remove_legacy_sensor_entities(hass: HomeAssistant, entry: ConfigEntry) -> N
             registry.async_remove(entity_id)
 
 
+def _rename_default_entity_ids(hass: HomeAssistant, entry: ConfigEntry) -> None:
+    """Shorten known default IDs while preserving custom IDs and collisions."""
+    registry = er.async_get(hass)
+    for platform, suffix in (
+        (Platform.DATE, "start"),
+        (Platform.DATE, "stop"),
+        (Platform.TIME, "time_home"),
+        (Platform.BINARY_SENSOR, "now"),
+    ):
+        unique_id = f"{entry.entry_id}_holiday_{suffix}"
+        entity_id = registry.async_get_entity_id(platform, DOMAIN, unique_id)
+        old_ids = {
+            f"{platform}.holiday_{suffix}",
+            f"{platform}.holiday_sensor_holiday_{suffix}",
+            f"{platform}.holiday_sensors_holiday_{suffix}",
+        }
+        if entity_id not in old_ids:
+            continue
+        new_entity_id = f"{platform}.holiday_sensor_{suffix}"
+        if registry.async_get(new_entity_id) is None and hass.states.get(new_entity_id) is None:
+            registry.async_update_entity(entity_id, new_entity_id=new_entity_id)
+
+
 async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
     """Set up Holiday Sensors from a config entry."""
     _remove_legacy_sensor_entities(hass, entry)
+    _rename_default_entity_ids(hass, entry)
     await hass.config_entries.async_forward_entry_setups(entry, PLATFORMS)
     return True
 

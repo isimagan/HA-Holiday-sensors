@@ -36,5 +36,25 @@
         "title": "Set up Holiday Sensors"
       }
     }
+  },
+  "entity": {
+    "date": {
+      "start": {
+        "name": "Start"
+      },
+      "stop": {
+        "name": "Stop"
+      }
+    },
+    "time": {
+      "time_home": {
+        "name": "Time home"
+      }
+    },
+    "binary_sensor": {
+      "now": {
+        "name": "Now"
+      }
+    }
   }
 }
