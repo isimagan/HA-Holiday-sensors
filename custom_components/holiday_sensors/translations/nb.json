@@ -1,39 +1,39 @@
 {
   "config": {
     "abort": {
-      "single_instance_allowed": "Bare én Holiday Sensors-instans kan konfigureres."
+      "single_instance_allowed": "Only one Holiday Sensors instance can be configured."
     },
     "error": {
-      "stop_not_after_start": "Hjemreisedatoen må være etter avreisedatoen."
+      "stop_not_after_start": "The home date must be after the departure date."
     },
     "step": {
       "reconfigure": {
         "data": {
-          "holiday_start": "Avreisedato",
-          "holiday_stop": "Hjemreisedato",
-          "holiday_time_home": "Forventet hjemkomsttid"
+          "holiday_start": "Departure date",
+          "holiday_stop": "Home date",
+          "holiday_time_home": "Expected arrival time"
         },
         "data_description": {
-          "holiday_start": "Feriens første dag.",
-          "holiday_stop": "Dagen du reiser hjem. Ferien avsluttes ved starten av denne datoen.",
-          "holiday_time_home": "Forventet lokal hjemkomsttid på hjemreisedatoen."
+          "holiday_start": "The first day of the holiday.",
+          "holiday_stop": "The day you travel home. The holiday ends at the start of this date.",
+          "holiday_time_home": "The expected local time of arrival on the home date."
         },
-        "description": "Oppdater datoene og forventet hjemkomsttid.",
-        "title": "Oppdater ferie"
+        "description": "Update the dates and expected arrival time.",
+        "title": "Update holiday"
       },
       "user": {
         "data": {
-          "holiday_start": "Avreisedato",
-          "holiday_stop": "Hjemreisedato",
-          "holiday_time_home": "Forventet hjemkomsttid"
+          "holiday_start": "Departure date",
+          "holiday_stop": "Home date",
+          "holiday_time_home": "Expected arrival time"
         },
         "data_description": {
-          "holiday_start": "Feriens første dag.",
-          "holiday_stop": "Dagen du reiser hjem. Ferien avsluttes ved starten av denne datoen.",
-          "holiday_time_home": "Forventet lokal hjemkomsttid på hjemreisedatoen."
+          "holiday_start": "The first day of the holiday.",
+          "holiday_stop": "The day you travel home. The holiday ends at the start of this date.",
+          "holiday_time_home": "The expected local time of arrival on the home date."
         },
-        "description": "Velg ferieperiode og forventet hjemkomsttid.",
-        "title": "Konfigurer Holiday Sensors"
+        "description": "Choose the holiday period and expected arrival time.",
+        "title": "Set up Holiday Sensors"
       }
     }
   },
@@ -43,17 +43,17 @@
         "name": "Start"
       },
       "stop": {
-        "name": "Stopp"
+        "name": "Stop"
       }
     },
     "time": {
       "time_home": {
-        "name": "Hjemkomst"
+        "name": "Time home"
       }
     },
     "binary_sensor": {
       "now": {
-        "name": "Nå"
+        "name": "Now"
       }
     }
   }
