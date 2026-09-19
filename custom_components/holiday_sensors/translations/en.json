@@ -48,37 +48,12 @@
     },
     "time": {
       "time_home": {
-        "name": "Time home",
-        "state_attributes": {
-          "homeDate": {
-            "name": "Home date"
-          },
-          "homeToday": {
-            "name": "Home today"
-          },
-          "custom_ui_more_info": {
-            "name": "Custom more-info control"
-          }
-        }
+        "name": "Time home"
       }
     },
     "binary_sensor": {
       "now": {
-        "name": "Now",
-        "state_attributes": {
-          "lastDay": {
-            "name": "Last day"
-          },
-          "dayNumber": {
-            "name": "Day number"
-          },
-          "daysLeft": {
-            "name": "Days left"
-          },
-          "numberOfDays": {
-            "name": "Number of days"
-          }
-        }
+        "name": "Now"
       }
     }
   }
