@@ -89,6 +89,11 @@ class HolidayTimeHome(TimeEntity):
         )
 
     @callback
+    def async_entity_id_changed(self, old_entity_id: str) -> None:
+        """Opt in to in-place entity ID changes."""
+        super().async_entity_id_changed(old_entity_id)
+
+    @callback
     def _handle_midnight(self, now: datetime) -> None:
         """Write a fresh state when the local date changes."""
         self.async_write_ha_state()
